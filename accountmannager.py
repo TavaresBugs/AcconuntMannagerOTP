@@ -3,10 +3,13 @@ import tkinter as tk
 
 contas = []
 
-def box_default(user_info,window):
+def box_default(user_info,window,coluna):
     frame_box = tk.Frame(window)
-    frame_box.grid()
-    tk.Label(frame_box, text=user_info["usuario"])
+    frame_box.grid(row=0, column=coluna)
+    label_servico = tk.Label(frame_box, text=user_info["servico"])
+    label_usuario = tk.Label(frame_box, text=user_info["usuario"])
+    label_usuario.grid(row=1, column=coluna)
+    label_servico.grid(row=0, column=coluna)
 
 
 def carregar_contas():
@@ -73,20 +76,10 @@ def main():
     contas = carregar_contas()
     janela = tk.Tk()
     janela.title("Gerenciador de Contas e OTP")
-    for conta in contas:
-        box_default(conta,janela)
+    for index, conta in enumerate(contas):
+        box_default(conta,janela,index)
 
-    # Creates a text label that belongs to our 'janela'
-    label_servico = tk.Label(janela, text="Nome do Serviço:")
 
-    # Places the label in the first row (row=0) and first column (column=0)
-    label_servico.grid(row=0, column=0)
-
-    # Creates a text entry box that also belongs to 'janela'
-    entry_servico = tk.Entry(janela)
-
-    # Places the entry box in the first row (row=0) and second column (column=1)
-    entry_servico.grid(row=0, column=1)
     janela.mainloop()
 
 
